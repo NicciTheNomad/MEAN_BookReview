@@ -38,6 +38,7 @@ export class ReviewResolver implements Resolve<Review[]> {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<Review[]> {
-    return this.reviewService.getReviews();
+    // return this.reviewService.getReviews();
+    return;
   }
 }
