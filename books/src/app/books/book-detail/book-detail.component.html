@@ -1,0 +1,78 @@
+<section>
+  <div class='container'>
+    <fieldset class='scheduler-border'>
+      <div *ngIf='errorMessage'>
+        <p>{{errorMessage}}</p>
+      </div>
+      <legend>Selected Book: "{{book.title}}"</legend>
+      <form #changeThisBook='ngForm'>
+        <div class='container'>
+          <label for="title">Book Title: </label>
+          <input type="text" name='title' required [(ngModel)]='book.title' #title='ngModel'>
+          <br>
+          <label for="author">
+          Book Author:
+          </label>
+          <input type="text" name='author' required [(ngModel)]='book.author' #author='ngModel'>
+          <br>
+          <label for="pages">Book Page Count: </label>
+          <input type="number" name='pages' min='1' required [(ngModel)]='book.pages' #pages='ngModel'>
+          <br>
+          <label for="year">Year of Publication: </label>
+          <input type="year" name='year' min='1' required [(ngModel)]='book.year' #year='ngModel'>
+          <br>
+          <label for="publisher">Book Publisher: </label>
+          <input type="text" name='publisher' required [(ngModel)]='book.publisher' #publisher='ngModel'>
+        </div>
+        <button (click)='onSubmit(book)'>Update</button>
+      </form>
+    </fieldset>
+  </div>
+</section>
+<section>
+  <fieldset>
+    <legend>Reviews for "{{book.title}}"</legend>
+    <table class='table table-striped'>
+      <thead>
+        <th>
+          Reviews
+        </th>
+      </thead>
+      <tbody>
+        <tr *ngFor='let review of reviews'>
+          <td>{{ book.review }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </fieldset>
+</section>
+<!--
+<div class='container'>
+  <h3>Edit Book</h3>
+  <div *ngFor='let book of books'>
+    <form #changeBook='ngForm'>
+      <div class='container'>
+        <label for="title">Book Title: </label>
+        <input type="text" name='title' required [(ngModel)]='book.title' #title='ngModel'>
+
+        <label for="author">
+          Book Author:
+        </label>
+        <input type="text" name='author' required [(ngModel)]='book.author' #author='ngModel'>
+
+        <label for="pages">Book Page Count: </label>
+        <input type="number" name='pages' min='1' required [(ngModel)]='book.pages' #pages='ngModel'>
+
+        <label for="year">Year of Publication: </label>
+        <input type="year" name='year' min='1' required [(ngModel)]='book.year' #year='ngModel'>
+
+        <label for="publisher">Book Publisher: </label>
+        <input type="text" name='publisher' required [(ngModel)]='book.publisher' #publisher='ngModel'>
+      </div>
+
+      <button (click)='onSubmit(book)'>Update</button>
+    </form>
+
+  </div>
+
+</div> -->

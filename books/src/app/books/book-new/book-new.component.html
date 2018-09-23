@@ -1,0 +1,72 @@
+<section>
+  <fieldset class='scheduler-border'>
+    <legend class='scheduler-border'>Add / Create A Book </legend>
+    {{ bookForm.value | json }}
+    <!-- lecture from April Jason had {{bookForm.valid | json}} -->
+    <form (submit)='bookForm.valid && onSubmit($event, bookForm)' #bookForm='ngForm'>
+      <div>
+        <label for="">Title</label>
+        <input type="text" name='title' [(ngModel)]='book.title' required #title='ngModel' minlength='6'> {{ title.errors
+        || json }}
+        <div *ngIf='(title.touched || title.dirty) && title.errors'>
+          <div *ngIf='title.errors.required'>
+            enter title please
+          </div>
+          <div *ngIf='title.errors.minlength'>
+            title must be {{ title.errors.minlength.requiredLength }} characters. {{ title.errors.minlength.actualLength}} is not long
+            enough!
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="">Author</label>
+        <input type="text" name='author' [(ngModel)]='book.author' required #author='ngModel' minlength='3'> {{ author.errors
+        | json }}
+        <div *ngIf='(author.touched || author.dirty) && author.errors'>
+          <div *ngIf='author.errors.required'>
+            enter title please
+          </div>
+          <div *ngIf='author.errors.minlength'>
+            author must be {{ author.errors.minlength.requiredLength }} characters. {{ author.errors.minlength.actualLength}} is not
+            long enough!
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="">Pages</label>
+        <input type="number" name='pages' [(ngModel)]='book.pages' #pages='ngModel' min='1' max='50000' required>
+        <div *ngIf='pages.touched && pages.errors'>
+          <div *ngIf='pages.min'>
+            {{ pages.min | json }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="">Year</label>
+        <input type="number" name='year' [(ngModel)]='book.year' #year='ngModel' min='-2000' max='2018' required>
+        <div *ngIf='year.touched && year.errors'>
+          <div *ngIf='year.min'>
+            {{ year.min | json }}
+          </div>
+        </div>
+      </div>
+      <div>
+        <label for="">Publisher</label>
+        <input type="text" name='publisher' [(ngModel)]='book.publisher' required #publisher='ngModel' minlength='4'> {{
+        publisher.errors || json}}
+      </div>
+      <div *ngIf='(publisher.touched) && publisher.errors'>
+        <div *ngIf='publisher.errors.required'>
+          enter title please
+        </div>
+        <div *ngIf='publisher.errors.minlength'>
+          publisher must be {{ publisher.errors.minlength.requiredLength }} characters. {{ publisher.errors.minlength.actualLength}}
+          is not long enough!
+        </div>
+      </div>
+      <!-- <button>Submit</button> -->
+      <button *ngIf='bookForm.valid'>Submit Book Information</button>
+    </form>
+
+  </fieldset>
+</section>

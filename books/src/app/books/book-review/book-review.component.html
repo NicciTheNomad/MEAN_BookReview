@@ -1,0 +1,81 @@
+<fieldset class='scheduler-border'>
+  <legend class='scheduler-border'>Write A Review for: {{book.title}} </legend>
+  <section>
+    <div class='container'>
+      {{ reviewForm.value | json }}
+      <form (submit)='reviewForm.valid && onSubmit(reviewForm)' #reviewForm='ngForm'>
+        <div>
+          <label for="">Reviewers Name</label>
+          <input type="text" name='name' [(ngModel)]='review.name' required #name='ngModel' minlength='3'> {{ name.errors
+          | json }}
+          <div *ngIf='(name.touched || name.dirty) && name.errors'>
+            <div *ngIf='name.errors.required'>
+              enter name please
+            </div>
+            <div *ngIf='name.errors.minlength'>
+              Reviewers name must be {{ name.errors.minlength.requiredLength }} characters. {{ name.errors.minlength.actualLength}} is
+              not long enough!
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="">Stars [1 - 5]</label>
+          <input type="number" name='stars' [(ngModel)]='review.stars' #stars='ngModel' min='1' max='5' required>
+          <div *ngIf='stars.touched && stars.errors'>
+            <div *ngIf='stars.min'>
+              {{ stars.min | json }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <label for="description">Review</label>
+          <br>
+          <input type="textarea" name='description' [(ngModel)]='review.description'>
+        </div>
+        <input type="submit" value="Submit Review">
+      </form>
+    </div>
+  </section>
+</fieldset>
+<fieldset class='scheduler-border'>
+  <div class='container'>
+    {{book.title}}
+  </div>
+  <section>
+    <fieldset>
+      <legend>Reviews for: "{{book.title}}"</legend>
+      <table class='table table-striped'>
+        <thead>
+          <th>
+            Reviewer Name
+          </th>
+          <th>
+            Stars
+          </th>
+          <th>
+            Review
+          </th>
+          <th>
+            Actions: Update
+          </th>
+        </thead>
+        <tbody>
+          <!-- <tr *ngFor='let review of reviews'> -->
+          <!-- <tr>
+            <td>{{ book.title}}:</td>
+            <td>{{ book.author}}:</td>
+            <td>{{ review.book}}</td>
+          </tr> -->
+          <tr *ngFor='let review of reviews'>
+            <td>{{ review.name}}</td>
+            <td>{{ review.stars}}</td>
+            <td>{{ review.description }}</td>
+            <td>
+              <button>Update</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </fieldset>
+  </section>
+</fieldset>

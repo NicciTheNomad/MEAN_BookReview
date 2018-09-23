@@ -1,0 +1,48 @@
+<!-- <app-book-new (newBook)='onCreate($event)'></app-book-new> -->
+
+<section>
+  <table class='table table-striped'>
+    <thead>
+      <th>
+        ID:
+        <input type="text" placeholder="id" [(ngModel)]='filter._id'>
+        <button *ngIf='filter._id' (click)='filter._id = null' class='clear'>x</button>
+      </th>
+      <th>
+        <input type="text" placeholder="title" [(ngModel)]='filter.title'>
+        <button *ngIf='filter.title' (click)='filter.title = null' class='clear'>x</button>
+      </th>
+      <th>
+        <input type="text" placeholder="author" [(ngModel)]='filter.author'>
+        <button *ngIf='filter.author' (click)='filter.author = null' class='clear'>x</button>
+      </th>
+      <th>
+        <input type="text" placeholder="year" [(ngModel)]='filter.year'>
+        <button *ngIf='filter.year' (click)='filter.year= null' class='clear'>x</button>
+      </th>
+      <th>
+        Actions
+        <button *ngIf='filter._id || filter.title || filter.author || filter.year' (click)='clearFilter()' class='clear'>x</button>
+      </th>
+    </thead>
+
+    <tbody>
+      <!-- the / in front of books make the path absolute -->
+      <!-- <tr *ngFor='let book of books | search:filter' (click)='onSelect(book)' [routerLink]="['/books', book.id]"> -->
+      <tr *ngFor='let book of books | search:filter' (click)='onSelect(book)' [routerLink]='book._id'>
+        <td>{{ book._id }}</td>
+        <td>{{ book.title | titleize }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.year }}</td>
+        <td (click)='onClick($event)'>
+          <button class='link' (click)='onDelete(book)'>DELETE</button>
+          <a class='link' [routerLink]='book._id'>UPDATE</a>
+          <a class='link' [routerLink]="[book._id, 'reviews']">REVIEW</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+
+<!-- <app-book-detail [book]='selectedBook'></app-book-detail> -->
